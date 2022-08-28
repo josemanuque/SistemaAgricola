@@ -32,7 +32,7 @@ void login(MYSQL* con) {
         password = readString();
 		
         if (mysql_real_connect(con, "localhost", user, password,
-            NULL, 0, NULL, 0) == NULL) {
+            "sag", 0, NULL, 0) == NULL) {
             fprintf(stderr, "%s\n", mysql_error(con));
             mysql_close(con);
             con = mysql_init(NULL);
@@ -64,11 +64,32 @@ MYSQL* connectServer() {
     return con;
 }
 
+void getTable(MYSQL* con, char* table) {
+    char query[100];
+    sprintf_s(query, sizeof(query), "SELECT * FROM %s", table);
+    mysql_query(con, query);
+    MYSQL_RES* res = mysql_store_result(con);
+    if (res == NULL) {
+        fprintf(stderr, "%s\n", mysql_error(con));
+        return;
+    }
+    int num_fields = mysql_num_fields(res);
+    MYSQL_ROW row;
+    while ((row = mysql_fetch_row(res))) {
+        for (int i = 0; i < num_fields; i++)
+        {
+            printf("%s ", row[i] ? row[i] : "NULL");
+        }
+
+        printf("\n");
+    }
+    mysql_free_result(res);
+}
 
 int main() {
     //menuPrincipal();
 	MYSQL* con = connectServer();
-    mysql_query(con, "USE TEST"); 
-    mysql_query(con, "CREATE TABLE prueba2 ( nombre VARCHAR(50) NOT NULL)");
+    getTable(con, "verPlanillaElegida");
+    //mysql_query(con, "CREATE TABLE prueba2 ( nombre VARCHAR(50) NOT NULL)");
 }
 
