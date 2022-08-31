@@ -197,7 +197,7 @@ DELIMITER ;
 
 -- Procedimiento que recibe una planilla y retorna los detalles de los empleados en esta
 DELIMITER $$
-create procedure verPlanillaElegida(idPlanilla int)
+create procedure verPlanillaElegida(in idPlanilla int)
 	begin
 		select e.cedula, e.nombre, e.apellido1, e.apellido2, e.labor, e.salario, 
 		p.mes, p.ano, p.subtotal, p.total, p.detalles from planilla p 
@@ -264,7 +264,7 @@ DELIMITER ;
 -- Procedimiento que muestra el balance mensual de un año
 
 DELIMITER $$
-create procedure balanceMensual(inputYear int)
+create procedure balanceMensual(in inputYear int)
 	begin
 		select coalesce(p.mes, f.mes) as month, ifnull(p.total, 0) as totalNominaCargas, ifnull(f.subtotal, 0) 
 			as subtotalVentas, ifnull(f.impuesto, 0) as totalImpuesto, (ifnull(f.subtotal, 0) - ifnull(p.total, 0)) as Balance from

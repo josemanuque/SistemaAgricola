@@ -76,5 +76,5 @@ C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\proyecto1\p
 C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\proyecto1\proyecto1\main.c(820,23): warning C4047: '!=': 'char *' differs in levels of indirection from 'int'
 C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\proyecto1\proyecto1\main.c(829,39): warning C4047: '=': 'sale *' differs in levels of indirection from 'size_t'
 C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\proyecto1\proyecto1\main.c(900,24): warning C4244: 'initializing': conversion from 'uint64_t' to 'int', possible loss of data
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\proyecto1\proyecto1\main.c(1016,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\proyecto1\proyecto1\main.c(1021,35): warning C4018: '<': signed/unsigned mismatch
   proyecto1.vcxproj -> C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\proyecto1\x64\Debug\proyecto1.exe

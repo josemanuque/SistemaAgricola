@@ -519,9 +519,9 @@ void printTable(MYSQL* con, char* table, char* columns) {
         }
 
     }
-    res = mysql_store_result(con);
     printf("\n");
     mysql_free_result(res);
+    mysql_reset_connection(con);
 }
 
 
@@ -915,8 +915,8 @@ Funcion encargada de pedir a la base una query e imprimir lo que retorna
 - Entradas: Conexion a la BD, string con el nombre de la tabla.
 - Salida: Ninguna. Imprime en consola todos los datos de la tabla
 */
-void getDatabaseResult(MYSQL* conn, char* query) {
-    MYSQL* con = connectServer();
+void getDatabaseResult(MYSQL* con, char* query) {
+    //MYSQL* con = connectServer();
     mysql_query(con, query);
     MYSQL_RES* res = mysql_store_result(con);
     if (res == NULL) {
@@ -939,9 +939,14 @@ void getDatabaseResult(MYSQL* conn, char* query) {
         }
 
     }
+
     printf("\n");
-    mysql_close(con);
     mysql_free_result(res);
+    while (mysql_more_results(con))
+    {
+        mysql_next_result(con);
+    }
+    mysql_reset_connection(con);
 }
 
 /*
@@ -1136,7 +1141,21 @@ void adminMenu(MYSQL* conn) {
         }
         else if (op == '6') {
             printTable(conn, "balanceAnual", "*");
-        }
+            int year;
+            while (1) {
+                printf("\nIngrese una el ano: ");
+                year = atoi(readString());
+                if (year > 999)
+                    break;
+            }
+			char query[100];
+			//MYSQL* con = connectServer();
+			sprintf_s(query, sizeof(query), "call balanceMensual(%d);", year);
+            getDatabaseResult(conn, query);
+		}
+		else if (op == '7') {
+			break;
+		}
         else {
             printf("\nOpcion no valida.\n");
         }
