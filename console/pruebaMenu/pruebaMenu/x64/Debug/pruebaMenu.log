@@ -1,0 +1,13 @@
+﻿  main.c
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(54,16): warning C4477: 'printf' : format string '%f' requires an argument of type 'double', but variadic argument 3 has type 'char *'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(79,12): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(110,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(141,12): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(171,45): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(175,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(284,35): warning C4047: '!=': 'int' differs in levels of indirection from 'char [2]'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(308,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(315,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(290,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(299,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  pruebaMenu.vcxproj -> C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\x64\Debug\pruebaMenu.exe
