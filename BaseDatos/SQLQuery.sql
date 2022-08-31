@@ -260,6 +260,27 @@ create procedure ingresaProductoFactura(tempProductoID char(2), cantidad int)
     end$$;
 DELIMITER ;
 
+		select cedulaJuridica, nombreLocal, telefono from infolocal;
+
+DELIMITER $$
+create procedure verFacturaElegida(in idFactura int)
+	begin
+		select f.id, f.nombreCliente, f.dia, f.mes, f.ano, f.subtotal, f.total 
+			from factura f where f.id = idFactura;
+    end $$;
+DELIMITER ;
+
+DELIMITER $$
+create procedure verProductosFactura(in idFactura int)
+	begin
+		select p.id,  p.nombre, p.costo, fp.cantidad, p.impuesto
+			from producto p inner join facturaProductos fp on p.id = fp.idProducto
+			where fp.idFactura = idFactura;
+    end $$;
+DELIMITER ;
+
+
+
 
 -- Procedimiento que muestra el balance mensual de un año
 
@@ -337,6 +358,6 @@ create view balanceAnual as
 			group by ano) as f on p.ano = f.ano where p.total != 0 or f.subtotal != 0 order by year;
 
 
-
+create view
 
     

@@ -1137,7 +1137,20 @@ void adminMenu(MYSQL* conn) {
             //mysql_close(con);
         }
         else if (op == '5') {
-            
+            printTable(conn, "factura", "id, dia, mes, ano, subtotal, total");
+            int idFactura;
+            while (1) {
+                printf("\nIngrese una opcion: ");
+                idFactura = atoi(readString());
+                if (idFactura > 0)
+                    break;
+            }
+            printTable(conn, "infoLocal", "cedulaJuridica, nombreLocal, telefono");
+            char query[100];
+            sprintf_s(query, sizeof(query), "call verFacturaElegida(%d);", idFactura);
+            getDatabaseResult(conn, query);
+            sprintf_s(query, sizeof(query), "call verProductosFactura(%d);", idFactura);
+            getDatabaseResult(conn, query);
         }
         else if (op == '6') {
             printTable(conn, "balanceAnual", "*");
