@@ -54,7 +54,7 @@ void adminMenu(MYSQL* conn, int validar);
 void getDatabaseResult(MYSQL* con, char* query);
 void makeSale(MYSQL* con, int x);
 void makeSale(MYSQL* con, int x);
-
+void mainMenu(MYSQL* conn);
 /*
 Funcion que se conecta a la base de datos MYSQL y retorna la conexion
 - No recibe entradas
@@ -575,7 +575,7 @@ void mostrarFactura(MYSQL* conn) {
 /*Funcion que se encarga de pedir los datos finales de la bd
 -Entrada: Conexion a la BD, datos necesarios para concluir la factura
 -Salida: Ninguna, llama a mostrar factura */
-void completePurchase(MYSQL* conn, char name[], int day[], int month, int year, char idArea[]) {
+void completePurchase(MYSQL* conn, char name[], int day, int month, int year, char idArea[]) {
 
     //char query[100] = " ";
     char sql_statement[2048];
@@ -625,7 +625,7 @@ void invoice(MYSQL* conn) {
     name = readString();
     do {
         printf("\n\n------------ Ingrese la fecha en formata de numeros ------------\n");
-        printf("Ingrese el año: ");
+        printf("Ingrese el year: ");
         year = atoi(readString());
 
         printf("Ingrese el mes: ");
@@ -948,6 +948,7 @@ void makeSale(MYSQL* con, int x) {
             }
             else {
                 adminMenu(con, 1);
+                break;
             }
 
         }
@@ -1258,7 +1259,9 @@ void adminMenu(MYSQL* conn, int validar) {
         else {
             printf("\nOpcion no valida.\n");
         }
-
+        if (op == '7') {
+            mainMenu(conn);
+        }
     } while (op != '7');
 }
 
