@@ -1,13 +1,81 @@
 ﻿  main.c
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(54,16): warning C4477: 'printf' : format string '%f' requires an argument of type 'double', but variadic argument 3 has type 'char *'
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(79,12): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(110,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(141,12): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(171,45): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(175,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(284,35): warning C4047: '!=': 'int' differs in levels of indirection from 'char [2]'
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(308,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(315,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(290,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(299,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(193,12): warning C4244: '=': conversion from 'uint64_t' to 'unsigned int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(207,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(208,44): warning C4047: '=': 'MYSQL_ROW *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(210,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(215,61): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(215,58): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(221,59): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(221,56): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(227,62): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(227,59): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(233,62): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(233,59): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(239,58): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(239,55): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(243,59): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(243,56): warning C4024: 'atof': different types for formal and actual parameter 1
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(243,43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(247,65): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(247,62): warning C4024: 'atof': different types for formal and actual parameter 1
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(247,49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(265,12): warning C4244: '=': conversion from 'uint64_t' to 'unsigned int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(279,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(280,44): warning C4047: '=': 'MYSQL_ROW *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(282,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(287,52): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(287,49): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(293,54): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(293,51): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(297,58): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(297,55): warning C4024: 'atof': different types for formal and actual parameter 1
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(297,42): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(303,61): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(303,58): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(323,12): warning C4244: '=': conversion from 'uint64_t' to 'unsigned int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(336,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(338,44): warning C4047: '=': 'MYSQL_ROW *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(340,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(344,57): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(344,54): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(350,57): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(350,54): warning C4024: 'strcpy': different types for formal and actual parameter 2
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(354,57): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(354,54): warning C4024: 'atof': different types for formal and actual parameter 1
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(354,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(358,55): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(358,52): warning C4024: 'atof': different types for formal and actual parameter 1
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(358,39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(413,35): warning C4047: '!=': 'int' differs in levels of indirection from 'char [2]'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(437,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(444,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(419,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(428,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(517,20): warning C4244: 'initializing': conversion from 'uint64_t' to 'int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(558,48): warning C4047: '=': 'MYSQL_ROW *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(562,94): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(562,91): warning C4024: 'atoi': different types for formal and actual parameter 1
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(567,96): warning C4047: 'function': 'const char *' differs in levels of indirection from 'MYSQL_ROW'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(567,93): warning C4024: 'atoi': different types for formal and actual parameter 1
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(731,29): warning C4047: '=': 'char *' differs in levels of indirection from 'char'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(733,22): warning C4047: '==': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(734,21): warning C4047: 'function': 'int' differs in levels of indirection from 'MYSQL *'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(734,17): warning C4024: 'buy': different types for formal and actual parameter 1
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(734,34): warning C4020: 'buy': too many actual parameters
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(736,27): warning C4047: '==': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(751,27): warning C4047: '==': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(755,23): warning C4047: '!=': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(787,26): warning C4047: '=': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(796,23): warning C4047: '!=': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(764,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(822,17): warning C4028: formal parameter 1 different from declaration
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(822,30): warning C4029: declared formal parameter list different from definition
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(854,29): warning C4047: '=': 'char *' differs in levels of indirection from 'char'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(856,22): warning C4047: '==': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(859,27): warning C4047: '==': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(872,27): warning C4047: '==': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(887,23): warning C4047: '!=': 'char *' differs in levels of indirection from 'int'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(897,39): warning C4047: '=': 'sale *' differs in levels of indirection from 'size_t'
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(990,24): warning C4244: 'initializing': conversion from 'uint64_t' to 'int', possible loss of data
+C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\pruebaMenu\main.c(1109,35): warning C4018: '<': signed/unsigned mismatch
   pruebaMenu.vcxproj -> C:\Users\josemanuque\Documents\Code Projects\SistemaAgricola\console\pruebaMenu\x64\Debug\pruebaMenu.exe

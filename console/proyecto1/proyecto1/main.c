@@ -3,10 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-//Structures of our data.
-
+//Estructuras necesarias para
 struct product {
     char* code;
     char* name;
@@ -44,13 +41,20 @@ struct sale {
     int aproved;
 };
 
+//Listas para almacenas estructuras
 struct sale* listFact;
 struct product* productsList;
 struct areas* areasList;
 struct employee* employeeList;
 
-
-
+//Funciones necesarias de inicializar antes por su recurente llamada.
+void buy(int n);
+void carrito();
+void adminMenu(MYSQL* conn, int validar);
+void getDatabaseResult(MYSQL* con, char* query);
+void makeSale(MYSQL* con, int x);
+void makeSale(MYSQL* con, int x);
+void mainMenu(MYSQL* conn);
 /*
 Funcion que se conecta a la base de datos MYSQL y retorna la conexion
 - No recibe entradas
@@ -78,7 +82,6 @@ MYSQL* connectServer() {
     return con;
 }
 
-
 /*
 Funcion que lee un string hasta que se presione enter y la retorna
 -Entradas no hay
@@ -100,13 +103,12 @@ char* readString() {
     return string;
 }
 
-
 /*
 Funcion encargada de localizar un archivo y abrirlo
 -Entrada: conexion a BD
--Salida: Ninguna, lee el archivo, llama a cargarProductos
+-Salida: Retorna la direccion donde se ubica archivo.
 */
-FILE* openFile(MYSQL* con) {
+FILE* openFile() {
     FILE* fd;
     char* path;
     while (1) {
@@ -114,10 +116,10 @@ FILE* openFile(MYSQL* con) {
         path = readString();
         fd = fopen(path, "r");
         if (fd == NULL) {
-            printf(" No existe  \n");
+            printf("*Mensaje:\n\tNo se encontro el archivo indicado. \n\n");
         }
         else {
-            printf("Encontrado \n");
+            printf("*Mensaje:\n\tArchivo localizado. \n\n");
             free(path);
             return fd;
         }
@@ -125,10 +127,12 @@ FILE* openFile(MYSQL* con) {
     }
 }
 
+//*** Funciones para imprimir structs ***
 
+/*Funcion para mostrar los empledos almacenado en la BD
+-Entrada: Ninguna
+-Salida: Ninguna, imprime en consola los datos.*/
 
-// ------------------------- Structs Prints
-//Function to display employees struct
 void showEmployees() {
     for (int i = 0; i < employeeList[0].index; i++) {
         printf("%d. Cedula: %s, Nombre: %s, Apellido 1: %s, Apellido 2: %s, Labor: %s, Salario: %f, Cargas %f \n", (i + 1),
@@ -137,7 +141,10 @@ void showEmployees() {
     }
 }
 
-//Function to display areas struct
+/*Funcion para mostrar las area almacenadas en la BD
+-Entrada: Ninguna
+-Salida: Ninguna, imprime en consola los datos.*/
+
 void showAreas() {
     for (int i = 0; i < areasList[0].index; i++) {
         printf("Codigo: %s, Nombre: %s, Dimension: %f, Producto pricipal: %s \n",
@@ -145,25 +152,38 @@ void showAreas() {
     }
 }
 
-//Function to display product struct
-//*************************************Modificada
+void showAreas2() {
+
+    printf("\nNumero\tId\tNombre \n");
+    for (int i = 0; i < areasList[0].index; i++) {
+        printf("%d\t", i + 1);
+        printf("%s\t", areasList[i].id);
+        printf("%s\t \n", areasList[i].name);
+    }
+}
+
+
+/*Funcion para mostrar los productos almacenadas en la BD
+-Entrada: Ninguna
+-Salida: Ninguna, imprime en consola los datos.*/
 void showProducts() {
     printf("Numero\tCodigo \t Nombre \t Precio \t I.V.A \n");
 
     for (int i = 0; i < productsList[0].index; i++) {
         printf("%d\t", i + 1);
         printf("%s\t", productsList[i].code);
-        //printf("%s\t", productsList[i].name);
+        printf("%s\t", productsList[i].name);
         printf("%f\t", productsList[i].price);
         printf("%f\t  \n", productsList[i].tax);
     }
 
-
 }
 
-// --------------------------------- Saves database tables in Structs  (Save)
+//**** Funciones para llenar los structs con los datos de la bd****
 
-//This function saves the employee data in a struct
+/*Funcion que extrae los datos de la bd y los almacena en memoria
+-Entrada: Conexion a la BD
+-Salida: Ninguna.*/
 void createEmployees(MYSQL_RES* res_ptr) {
     MYSQL_FIELD* headers;
     MYSQL_ROW* res_rows;
@@ -182,9 +202,8 @@ void createEmployees(MYSQL_RES* res_ptr) {
     employeeList[0].index = rows;
 
     while (headers = mysql_fetch_field(res_ptr)) {
-        //printf("%10s \t", headers->name);
+
     }
-    //printf("\n");
     for (int i = 0; i < rows; i++) {
         res_rows = mysql_fetch_row(res_ptr);
 
@@ -194,47 +213,49 @@ void createEmployees(MYSQL_RES* res_ptr) {
                 unsigned int n = sizeof(res_rows[j]);
                 employeeList[i].cedula = malloc(n * sizeof(char*));
                 strcpy((employeeList[i].cedula), res_rows[j]);
-                //printf("%10s \t", employeeList[i].cedula);
+
             }
             else if (j == 1) {
                 int n = sizeof(res_rows[j]);
                 employeeList[i].nombre = (char*)malloc(n * sizeof(char*));
                 strcpy(employeeList[i].nombre, res_rows[j]);
-                //printf("%10s \t", employeeList[i].nombre);
+
             }
             else if (j == 2) {
                 int n = sizeof(res_rows[j]);
                 employeeList[i].apellido1 = (char*)malloc(n * sizeof(char*));
                 strcpy(employeeList[i].apellido1, res_rows[j]);
-                //printf("%10s \t", employeeList[i].apellido1);
+
             }
             else if (j == 3) {
                 int n = sizeof(res_rows[j]);
                 employeeList[i].apellido2 = (char*)malloc(n * sizeof(char*));
                 strcpy(employeeList[i].apellido2, res_rows[j]);
-                //printf("%10s \t", employeeList[i].apellido2);
+
             }
             else if (j == 4) {
                 int n = sizeof(res_rows[j]);
                 employeeList[i].labor = (char*)malloc(n * sizeof(char*));
                 strcpy(employeeList[i].labor, res_rows[j]);
-                //printf("%10s \t", employeeList[i].labor);
+
             }
             else if (j == 5) {
                 employeeList[i].salario = atof(res_rows[j]);
-                //printf("%10f \t", employeeList[i].salario);
+
             }
             else if (j == 6) {
                 employeeList[i].salarioCargas = atof(res_rows[j]);
-                //printf("%10f \t", employeeList[i].salarioCargas);
+
             }
         }
-        //printf("\n");
+
     }
-    //showEmployees();
 }
 
-//This function saves the area data in a struct
+/*Funcion que extrae los datos de la bd y los almacena en memoria
+-Entrada: Conexion a la BD
+-Salida: Ninguna.*/
+
 void createAreas(MYSQL_RES* res_ptr) {
     MYSQL_FIELD* headers;
     MYSQL_ROW* res_rows;
@@ -252,9 +273,9 @@ void createAreas(MYSQL_RES* res_ptr) {
     areasList[0].index = rows;
 
     while (headers = mysql_fetch_field(res_ptr)) {
-        //printf("%10s \t", headers->name);
+
     }
-    //printf("\n");
+
     for (int i = 0; i < rows; i++) {
         res_rows = mysql_fetch_row(res_ptr);
 
@@ -264,37 +285,34 @@ void createAreas(MYSQL_RES* res_ptr) {
                 int n = sizeof(res_rows[j]);
                 areasList[i].id = malloc(n * sizeof(char*));
                 strcpy(areasList[i].id, res_rows[j]);
-                //printf("%10s \t", areasList[i].id);
+
             }
             else if (j == 1) {
                 int n = sizeof(res_rows[j]);
                 areasList[i].name = malloc(n * sizeof(char*));
                 strcpy(areasList[i].name, res_rows[j]);
-                //printf("%10s \t", areasList[i].name);
+
             }
             else if (j == 2) {
                 areasList[i].dimension = atof(res_rows[j]);
-                //printf("%10f \t", areasList[i].dimension);
+
             }
             else if (j == 3) {
                 int n = sizeof(res_rows[j]);
                 areasList[i].mainProduct = malloc(n * sizeof(char*));
                 strcpy(areasList[i].mainProduct, res_rows[j]);
-                //printf("%10s \t", areasList[i].mainProduct);
+
             }
 
-
         }
-        //printf("\n");
-
 
 
     }
-
-    //showAreas();
 }
 
-//This function saves the product data in a struct
+/*Funcion que extrae los datos de la bd y los almacena en memoria
+-Entrada: Conexion a la BD
+-Salida: Ninguna.*/
 void createProducts(MYSQL_RES* res_ptr) {
 
     MYSQL_FIELD* headers;
@@ -312,64 +330,62 @@ void createProducts(MYSQL_RES* res_ptr) {
     }
     productsList[0].index = rows;
     while (headers = mysql_fetch_field(res_ptr)) {
-        //printf("%10s \t", headers->name);
+
     }
-    //printf("\n");
 
     for (int i = 0; i < rows; i++) {
 
         res_rows = mysql_fetch_row(res_ptr);
 
-        for (int j = 0; j < columns; j++)
-        {
+        for (int j = 0; j < columns; j++) {
             if (j == 0) {
                 int n = sizeof(res_rows[j]);
                 productsList[i].code = (char*)malloc(n * sizeof(char*));
                 strcpy(productsList[i].code, res_rows[j]);
-                //printf("%10s \t", productsList[i].code);
+
             }
             else if (j == 1) {
                 int n = sizeof(res_rows[j]);
                 productsList[i].name = (char*)malloc(n * sizeof(char*));
                 strcpy(productsList[i].name, res_rows[j]);
-                //printf("%10s \t", productsList[i].name);
+
             }
             else if (j == 2) {
                 productsList[i].price = atof(res_rows[j]);
-                //printf("%10f \t", productsList[i].price);
+
             }
             else if (j == 3) {
                 productsList[i].tax = atof(res_rows[j]);
-                //printf("%10f \t", productsList[i].tax);
+
             }
         }
-        //printf("\n");
     }
+
+    printf("Mensaje:\n\tProductos ingresados a la base de datos.\n");
+    showProducts();
 }
 
 
+//---Funciones para leer datos desde un txt y guardarlos en la bd
 
-
-
-
-
-/*-------------------------- - Reading from txt file and saving to database------------------ */
-
-//Function to insert products in SQL
+/*Funcion ejecuta el insert en la bd
+-Entrada: Conexion a la BD y datos del producto
+-Salida: Ninguna, solo graba en la BD*/
 void insertProducts(MYSQL* conn, char productCode[], char productName[], float productPrice, float productTax) {
 
     char sql_statement[2048];
 
     sprintf(sql_statement, "INSERT INTO  producto (id, nombre, costo, impuesto) VALUES('%s', '%s', %f,%f )", productCode, productName, productPrice, productTax);
 
-    if (mysql_query(conn, sql_statement) != 0)
-    {
+    if (mysql_query(conn, sql_statement) != 0) {
         printf("Query failed  with the following message:\n");
         printf("%s\n", mysql_error(conn));
     }
 }
 
-// Function to empty temp char and reuse it without garbage.
+/*Funcion que limpia una variable utilizada para recolectar strings
+-Entrada: Varible a limpiar
+-Salida: Ninguna.*/
 void emptyTemp(char temp[]) {
 
     for (int i = 0; i < 10; i++) {
@@ -377,7 +393,9 @@ void emptyTemp(char temp[]) {
     }
 }
 
-// Reading from txt file and saving to database
+/*Funcion que lee los datos del archivo txt para posteriormente almacenarlos en la bd
+-Entrada: Conexion a la BD y archivo txt
+-Salida: Ninguna, llama a insertProducts.*/
 void readProducts(MYSQL* con, FILE* products) {
     char temp[10];
     char* productCode = "";
@@ -434,16 +452,12 @@ void readProducts(MYSQL* con, FILE* products) {
                 k++;
             }
         }
-        printf("Codigo: %s, Nombre: %s, Precio: %f, Tax: %f \n",
-            productCode, productName, productPrice, productTax);
 
         insertProducts(con, productCode, productName, productPrice, productTax);
-        
+
     }
     fclose(products);
 }
-
-
 
 /*
 Funcion encargada de ejecutar queries del
@@ -453,8 +467,6 @@ Funcion encargada de ejecutar queries del
 void runQuery(MYSQL* conn, char* query, int op) {
     int error;
     MYSQL_RES* res_ptr; //Here is where the info is located
-
-    
 
     //printf("\nQuery: %s\n", query);
     error = mysql_query(conn, query);
@@ -485,7 +497,6 @@ void runQuery(MYSQL* conn, char* query, int op) {
         fprintf(stderr, "%s\n", mysql_error(conn));
     }
 }
-
 
 /*
 Funcion encargada de pedir a la base una tabla e imprimirla
@@ -525,44 +536,82 @@ void printTable(MYSQL* con, char* table, char* columns) {
 }
 
 
+/*Funcion que se encarga de mostrar los datos finales de la facturación
+-Entrada: Conexion a la BD
+-Salida: Ninguna, muestra los resultados de la facturación */
+void mostrarFactura(MYSQL* conn) {
+    int error;
+    MYSQL_RES* res_ptr; //Here is where the info is located
+    MYSQL_ROW* res_rows;
 
+    char* query = "SELECT consecutivoFactura FROM infolocal;";
+    //printf("\nQuery: %s\n", query);
+    error = mysql_query(conn, query);
+    if (!error) {
+        res_ptr = mysql_store_result(conn); //Saving the result in the pointer
+        if (res_ptr == NULL) {
+            fprintf(stderr, "%s\n", mysql_error(conn));
+            return;
+        }
+        if (res_ptr) {
 
-void showAreas2() {
+            res_rows = mysql_fetch_row(res_ptr);
+            char query2[100];
+            printf("\n\n");
+            printf("************ Detalles de la Factura ************\n");
+            sprintf_s(query2, sizeof(query2), "call verFacturaElegida(%d);", atoi(res_rows[0]));
+            getDatabaseResult(conn, query2);
 
-    printf("\nNumero\tId\tNombre \n");
-    for (int i = 0; i < areasList[0].index; i++)
-    {
-        printf("%d\t", i + 1);
-        printf("%s\t", areasList[i].id);
-        printf("%s\t \n", areasList[i].name);
-    }
-}
-
-
-void buy(int n);
-
-void carrito();
-
-void completePurchase(MYSQL* conn, char name[], int day[], int month, int year, char idArea[]) {
-  
-    char query[100] = " ";
-    sprintf_s(query, sizeof(query), "call ingresaFactura('%s',%d,%d,%d,'%s');", name, day, month, year, idArea);
-    runQuery(conn, query, 0);
-    for (int i = 0; i < listFact[0].index; i++) {
-        if (listFact[i].aproved == 1) {
-            MYSQL* con = connectServer();
-            sprintf_s(query, sizeof(query), "call ingresaProductoFactura('%s', %d);", listFact[i].code, listFact[i].cantidad);
-            runQuery(conn, query, 0);
-            mysql_close(con);
+            printf("\n");
+            printf("------------ Detalles de la Compra ------------\n");
+            sprintf_s(query2, sizeof(query2), "call verProductosFactura(%d);", atoi(res_rows[0]));
+            getDatabaseResult(conn, query2);
 
         }
     }
-    //  printTable(conn, "Planilla", "*");
-    //  break;
 
 }
 
+/*Funcion que se encarga de pedir los datos finales de la bd
+-Entrada: Conexion a la BD, datos necesarios para concluir la factura
+-Salida: Ninguna, llama a mostrar factura */
+void completePurchase(MYSQL* conn, char name[], int day, int month, int year, char idArea[]) {
 
+    //char query[100] = " ";
+    char sql_statement[2048];
+    sprintf(sql_statement, "call ingresaFactura('%s',%d,%d,%d,'%s');", name, day, month, year, idArea);
+
+    if (mysql_query(conn, sql_statement) != 0) {
+        printf("Falla al crear factura:\n");
+        printf("%s\n", mysql_error(conn));
+    }
+    else {
+
+        for (int i = 0; i < listFact[0].index; i++) {
+            if (listFact[i].aproved == 1) {
+
+                sprintf(sql_statement, "call ingresaProductoFactura('%s', %d);", listFact[i].code, listFact[i].cantidad);
+
+                if (mysql_query(conn, sql_statement) != 0) {
+                    printf("Falla al facturar los productos:\n");
+                    printf("%s\n", mysql_error(conn));
+                }
+
+            }
+        }
+
+        printTable(conn, "infoLocal", "cedulaJuridica, nombreLocal, telefono");
+
+        mostrarFactura(conn);
+
+        makeSale(conn, 0);
+    }
+}
+
+/*Funcion que se encarga de facturar de solicitar y validar los datos
+para concluir la compra.
+-Entrada: Conexion a la BD
+-Salida: Ninguna.*/
 void invoice(MYSQL* conn) {
     char* name;
     int year;
@@ -576,7 +625,7 @@ void invoice(MYSQL* conn) {
     name = readString();
     do {
         printf("\n\n------------ Ingrese la fecha en formata de numeros ------------\n");
-        printf("Ingrese el año: ");
+        printf("Ingrese el year: ");
         year = atoi(readString());
 
         printf("Ingrese el mes: ");
@@ -584,10 +633,10 @@ void invoice(MYSQL* conn) {
         printf("Ingrese el dia: ");
         day = atoi(readString());
 
-        if (year < 1000 || month>12 || day > 31) {
+        if (year < 1000 || month > 12 || day > 31) {
             printf("*Mensaje:\n\tDebes ingresar un formato valido para la fecha. \n\n");
         }
-    } while (year < 1000 || month>12 || day > 31);
+    } while (year < 1000 || month > 12 || day > 31);
 
     printf("\n------------ Areas ------------\n");
 
@@ -601,17 +650,17 @@ void invoice(MYSQL* conn) {
         }
         else {
             areaId = areasList[narea - 1].id;
-            
+
             completePurchase(conn, name, day, month, year, areaId);
-            
+
         }
     } while (narea > areasList[0].index || narea <= 0);
 
-
-
 }
 
-
+/*Funcion encargada de eliminar los productos según se indica.
+-Entrada: identificador para ubicarse en la lista y eliminarlo
+-Salida: Ninguna, modifica la lista.*/
 void deleteProduct(int del) {
     int op2;
     int amount;
@@ -648,8 +697,10 @@ void deleteProduct(int del) {
     }
 }
 
-
-
+/*Funcion que se encarga de guardar los datos de los productos
+que el usuario desea comprar
+-Entrada: Conexion a la BD
+-Salida: Ninguna.*/
 void carrito(MYSQL* conn) {
 
     char* op;
@@ -659,7 +710,6 @@ void carrito(MYSQL* conn) {
 
         for (int i = 0; i < listFact[0].index; i++) {
             if (listFact[i].aproved == 1) {
-
 
                 printf("%d\t", i + 1);
                 printf("%s\t", listFact[i].code);
@@ -683,7 +733,6 @@ void carrito(MYSQL* conn) {
         if (op == '1') {
             buy(conn, listFact[0].index);
         }
-
         else if (op == '2') {
             int del;
             printf("\n------------ Eliminar Producto ------------ \n");
@@ -699,7 +748,6 @@ void carrito(MYSQL* conn) {
             }
 
         }
-
         else if (op == '3') {
             invoice(conn);
         }
@@ -708,10 +756,12 @@ void carrito(MYSQL* conn) {
 
 }
 
+/*Funcion que se encarga de validar los datos previamente a agregarlos al carrito
+-Entrada: Conexion a la bd, n tamaño de la lista, num dato a agregar des productos.
+-Salida: Ninguna.*/
 int addCart(MYSQL* conn, int n, int num) {
 
     char* cmp = 'n';
-    printf("Valor n: %d \n", n);
     if (n == 1) {
         listFact = malloc(n * sizeof(*listFact));
 
@@ -741,13 +791,11 @@ int addCart(MYSQL* conn, int n, int num) {
 
             }
 
-
         }
 
         if (cmp != 's') {
 
             listFact = (struct sale*)realloc(listFact, n * sizeof(*listFact));
-
 
             listFact[n - 1].code = (char*)malloc(n * sizeof(char));
             listFact[n - 1].code = productsList[num - 1].code;
@@ -768,33 +816,33 @@ int addCart(MYSQL* conn, int n, int num) {
     return n;
 }
 
-
-
+/*Funcion que se encarga de pedirle al usuario cuales productos desea.
+-Entrada: Conexion a la BD y n para saber tamaño de la lista de compras.
+-Salida: Ninguna.*/
 void buy(MYSQL* conn, int n) {
 
     int num;
     char* op;
 
+    fflush(stdin);
+
+    printf("\n------------ Productos Disponibles ------------\n\n");
+    showProducts();
+
+    printf("\nIngrese el numero del producto que desea: ");
+    num = atoi(readString());
+    n++;
+
+    if (num > 0 && num <= productsList[0].index) {
+        n = addCart(conn, n, num);
+
+    }
+    else {
+        n--;
+        printf("\n*Mensaje:\n\tDebes seleccionar un producto de la lista. \n\n");
+    }
+
     do {
-
-        fflush(stdin);
-
-
-        printf("\n------------ Productos Disponibles ------------\n\n");
-        showProducts();
-
-        printf("\nIngrese el numero del producto que desea: ");
-        num = atoi(readString());
-        n++;
-
-        if (num > 0 && num <= productsList[0].index) {
-            n = addCart(conn, n, num);
-
-        }
-        else {
-            n--;
-            printf("\n*Mensaje:\n\tDebes seleccionar un producto de la lista. \n\n");
-        }
         printf("\n------------ Productos ------------\n\n");
         printf("\n1.Seleccionar otro producto\n");
         printf("2.Ir al carrito\n");
@@ -803,33 +851,54 @@ void buy(MYSQL* conn, int n) {
 
         printf("Ingrese una opcion: ");
 
-
         op = readString()[0];
 
-        if (op == '2') {
+        if (op == '1') {
+            buy(conn, n);
+        }
+        else if (op == '2') {
 
-            listFact[0].index = n;
-            carrito(conn);
-            op = '4';
+            if (n == 0) {
+                printf("\n*Mensaje:\n\tNo hay productos en el carrito. \n\n");
+            }
+            else {
+
+                listFact[0].index = n;
+                carrito(conn);
+                makeSale(conn, n);
+            }
+
         }
         else if (op == '3') {
-            invoice(conn);
-        }
 
+            if (n == 0) {
+                printf("\n*Mensaje:\n\tNo hay productos en el carrito. \n\n");
+            }
+            else {
+
+                listFact[0].index = n;
+                invoice(conn);
+                makeSale(conn, n);
+                break;
+            }
+
+        }
 
     } while (op != '4');
 
 }
 
-
-void makeSale(MYSQL* con) {
+/*Funcion para el submenu de registro de ventas.
+-Entrada: Conexion a la BD, x para saber si el carrito está vacio o no
+-Salida: Ninguna.*/
+void makeSale(MYSQL* con, int x) {
     int n = 1;
-
 
     listFact = (n * sizeof(*listFact));
 
-
-    char first = { 0 };
+    char first = {
+      0
+    };
 
     char op;
 
@@ -851,21 +920,42 @@ void makeSale(MYSQL* con) {
         }
         else if (op == '2') {
 
-            printf("");
+            if (x == 0) {
+                printf("\n*Mensaje:\n\tNo hay productos en el carrito. \n\n");
+            }
+            else {
+                carrito(con);
+            }
         }
         else if (op == '3') {
-            invoice(con);
+            if (x == 0) {
+                printf("\n*Mensaje:\n\tNo hay productos en el carrito. \n\n");
+            }
+            else {
+                invoice(con);
+            }
+        }
+        else if (op == '4') {
+            printf("\n*Mensaje:\n\tAl salir perdera los avances en su compra. \n\n");
+            printf("1.Continuar comprando.\n");
+            printf("2.Salir\n");
+            printf("3.Seleccione una opcion:");
+
+            op = readString()[0];
+
+            if (op == '1') {
+                op = '0';
+            }
+            else {
+                adminMenu(con, 1);
+                break;
+            }
+
         }
 
     } while (op != '4');
 
-
 }
-
-
-
-
-
 
 
 /*
@@ -908,8 +998,6 @@ void login(MYSQL* con, int type) {
     free(password);
 }
 
-
-
 /*
 Funcion encargada de pedir a la base una query e imprimir lo que retorna
 - Entradas: Conexion a la BD, string con el nombre de la tabla.
@@ -942,8 +1030,7 @@ void getDatabaseResult(MYSQL* con, char* query) {
 
     printf("\n");
     mysql_free_result(res);
-    while (mysql_more_results(con))
-    {
+    while (mysql_more_results(con)) {
         mysql_next_result(con);
     }
     mysql_reset_connection(con);
@@ -958,10 +1045,10 @@ Funcion encargada de mostrar en consola menu de registro de planilla
 void menuPlanilla(MYSQL* conn) {
     printf("\n************ Registro de Planilla ************\n");
     printf("Ingrese el mes: ");
-	char* month = readString();
-	printf("Ingrese el ano: ");
-	char* year = readString();
-	
+    char* month = readString();
+    printf("Ingrese el ano: ");
+    char* year = readString();
+
     //printTable(conn, "empleado");
     //showEmployees();
     int quantity = employeeList[0].index;
@@ -975,24 +1062,25 @@ void menuPlanilla(MYSQL* conn) {
     unsigned int counter = 0;
     char* stringOp;
     char op;
-    do {;
+    do {
+        ;
         // Submenu
-            showEmployees();
-            printf("G. Guardar\n");
-            printf("Q. Salir sin guardar\n");
-            printf("Elige una opcion: ");
-        
+        showEmployees();
+        printf("G. Guardar\n");
+        printf("Q. Salir sin guardar\n");
+        printf("Elige una opcion: ");
+
         // Lee opción
         stringOp = readString();
-		op = stringOp[0];
+        op = stringOp[0];
 
-        // Transforma el char elegido en un int que 
+        // Transforma el char elegido en un int que
         opInt = atoi(stringOp) - 1;
-		// Chequea que no este el mismo empleado en la lista.
+        // Chequea que no este el mismo empleado en la lista.
         int flag = 0;
         // Verifica que la opcion elegida sea mayor a 0 y menor a la cantidad de empleados
         if (flag != 1 && opInt >= 0 && opInt < quantity) {
-            // 
+            //
             for (int i = 0; i < quantity; i++) {
                 if (cedulas[0] != NULL && strcmp(employeeList[opInt].cedula, cedulas[i]) == 0) {
                     flag = 1;
@@ -1027,18 +1115,17 @@ void menuPlanilla(MYSQL* conn) {
                 break;
             }
         }
-		else if (op == 'Q' || op == 'q') {
+        else if (op == 'Q' || op == 'q') {
             break;
         }
-		else if (flag == 1) {
-			printf("El empleado ya esta en la lista.");
-		}
+        else if (flag == 1) {
+            printf("El empleado ya esta en la lista.");
+        }
         else {
             printf("\nOpcion no valida.\n");
         }
     } while (op != 'Q');
 }
-
 
 /*
 Funcion encargada de mostrar en consola menu de opciones operativas
@@ -1066,11 +1153,10 @@ void operationsMenu(MYSQL* conn) {
             readProducts(conn, fd);
             char* query = "SELECT* FROM producto";
             runQuery(conn, query, 1);
-
         }
         else if (op == '2') {
             printTable(conn, "area", "*");
-            
+
         }
         else if (op == '3') {
             printTable(conn, "empleado", "*");
@@ -1087,16 +1173,17 @@ void operationsMenu(MYSQL* conn) {
     } while (op != '4');
 }
 
-
 /*
 Funcion encargada de mostrar en consola menu de opciones administrativas
 -Entradas: Conexion a la base de datos para mandar a funciones dentro de esta funcion
 -Salida: Ninguna, imprime en consola el menu.
 - Restriccion: Caracter pedido en opiones de menu debe estar en el rango de las opciones
 */
-void adminMenu(MYSQL* conn) {
+void adminMenu(MYSQL* conn, int validar) {
 
-    login(conn, 1);
+    if (validar == 0) {
+        login(conn, 1);
+    }
     printf("\n************ Opciones Administrativas ************\n");
     char op;
     do {
@@ -1118,7 +1205,7 @@ void adminMenu(MYSQL* conn) {
             menuPlanilla(conn);
         }
         else if (op == '3') {
-            makeSale(conn);
+            makeSale(conn, 0);
         }
         else if (op == '4') {
             printf("*** Planillas ***\n");
@@ -1161,18 +1248,20 @@ void adminMenu(MYSQL* conn) {
                 if (year > 999)
                     break;
             }
-			char query[100];
-			//MYSQL* con = connectServer();
-			sprintf_s(query, sizeof(query), "call balanceMensual(%d);", year);
+            char query[100];
+            //MYSQL* con = connectServer();
+            sprintf_s(query, sizeof(query), "call balanceMensual(%d);", year);
             getDatabaseResult(conn, query);
-		}
-		else if (op == '7') {
-			break;
-		}
+        }
+        else if (op == '7') {
+            break;
+        }
         else {
             printf("\nOpcion no valida.\n");
         }
-
+        if (op == '7') {
+            mainMenu(conn);
+        }
     } while (op != '7');
 }
 
@@ -1181,7 +1270,6 @@ void mainMenu(MYSQL* conn) {
     printf("****************** Sistema de Gestion de Agricola ******************\n");
     char op;
     do {
-
         printf("\n1. Opciones Operativas \n");
         printf("2. Opciones Administrativas \n");
 
@@ -1192,27 +1280,23 @@ void mainMenu(MYSQL* conn) {
             operationsMenu(conn);
         }
         else if (op == '2') {
-            adminMenu(conn);
+            adminMenu(conn, 0);
         }
 
     } while (op != '4');
 
 }
 
-
 int main() {
     MYSQL* con = connectServer();
-
-    char* query1 = "SELECT* FROM producto";
-    runQuery(con, query1, 1);
-	// Inserta areas y empleados en structs
+    // char* query1 = "SELECT* FROM producto";
+    // runQuery(con, query1, 1);
+     // Inserta areas y empleados en structs
     char* query2 = "SELECT* FROM area";
     runQuery(con, query2, 2);
     char* query3 = "SELECT* FROM empleado";
     runQuery(con, query3, 3);
 
-	// Menu principal
+    // Menu principal
     mainMenu(con);
-
 }
-
